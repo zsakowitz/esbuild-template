@@ -1,0 +1,26 @@
+{
+  "scripts": {
+    "dev": "bun run build:tw && bun run esb",
+    "esb": "mkdir -p dist; cp src/index.dev.html dist/index.html && bun run build:icons && esbuild --watch=forever --loader:.woff=file --loader:.ttf=file --loader:.woff2=file --loader:.svg=file --loader:.eot=file --servedir=dist --format=esm --bundle --outdir=dist --splitting src/index.ts",
+    "tw": "tailwindcss -i ./src/index.postcss -o ./src/index.dist.css --watch",
+    "build": "bun run build:tw && bun run build:esb && cp src/index.prod.html src/dist/index.html && bun run build:icons",
+    "build:esb": "esbuild --bundle --minify --format=esm --outdir=dist --splitting --loader:.woff=file --loader:.ttf=file --loader:.woff2=file --loader:.svg=file --loader:.eot=file src/index.ts --metafile=meta.json --legal-comments=linked",
+    "build:tw": "tailwindcss -i ./src/index.postcss -o ./src/index.dist.css --minify",
+    "build:icons": "true",
+    "lint:cycles": "madge --ts-config tsconfig.json --circular src/index.ts"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@tailwindcss/cli": "^4.1.4",
+    "esbuild": "^0.25.2",
+    "madge": "^8.0.0",
+    "prettier": "^3.5.3",
+    "prettier-plugin-tailwindcss": "^0.6.11",
+    "tailwindcss": "^4.1.4",
+    "typescript": "^5.8.3"
+  },
+  "prettier": {
+    "semi": false,
+    "proseWrap": "always"
+  }
+}
