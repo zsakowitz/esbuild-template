@@ -1,4 +1,5 @@
-This is a single-page application template which uses esbuild.
+This is a single-page application template which uses esbuild, tailwindcss,
+TypeScript, and Bun.
 
 ## Your code
 
